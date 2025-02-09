@@ -21,11 +21,11 @@ def post_delete(request, id):
     post = get_object_or_404(Post, id=id)
     if request.method == 'POST':
         post.delete()
-        return redirect('todos')
+        return redirect('tadas')
     return render(request, 'post_confirm_delete.html', {'post': post})
 
-def todos(request):
-    return render(request, 'todos.html')
+def tadas(request):
+    return render(request, 'tadas.html')
 
 def home(request):
     return render(request, 'home.html')

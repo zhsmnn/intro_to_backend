@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todos</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f7fa;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .todo {
+            background: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        .status {
+            font-weight: bold;
+            color: #ff6347;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Todos</h1>
+        <a href="{% url 'todo_create' %}">Создать новый пост</a>
+        <div class="todos">
+            {% for todo in todos %}
+                <div class="todo">
+                    <h2><a href="{% url 'todo_detail' todo.id %}">{{ todo.title }}</a></h2>
+                    <p>{{ todo.description }}</p>
+                    <p>Due: {{ todo.due_date }}</p>
+                    <p class="status">{{ todo.status|yesno:"Выполнено,Не выполнено" }}</p>
+                    <a href="{% url 'todo_delete' todo.id %}">Удалить</a>
+
+                </div>
+            {% empty %}
+                <p>Нет задач.</p>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
