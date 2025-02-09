@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Список фильмов</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+    <h1>Список фильмов</h1>
+    <div class="list-group">
+        {% if movies %}
+            {% for movie in movies %}
+                <a href="{% url 'movie_detail' movie.id %}" class="list-group-item list-group-item-action">
+                    <h5>{{ movie.title }}</h5>
+                    <p>{{ movie.description }}</p>
+                </a>
+            {% endfor %}
+        {% else %}
+            <!-- Статический список фильмов Marvel -->
+            <a href="/movie_detail/1" class="list-group-item list-group-item-action">
+                <h5>Мстители: Финал (Marvel)</h5>
+                <p>Кульминация саги о Мстителях, объединяющих силы для финальной битвы с Таносом.</p>
+            </a>
+            <a href="/movie_detail/2" class="list-group-item list-group-item-action">
+                <h5>Железный человек (Marvel)</h5>
+                <p>История гения, миллиардера и плейбоя Тони Старка, который становится Железным человеком.</p>
+            </a>
+            <a href="/movie_detail/3" class="list-group-item list-group-item-action">
+                <h5>Человек-паук: Вдали от дома (Marvel)</h5>
+                <p>Приключения подростка Питера Паркера, оказавшегося в центре международного заговора.</p>
+            </a>
+            <!-- Статический список фильмов Disney -->
+            <a href="/movie_detail/4" class="list-group-item list-group-item-action">
+                <h5>Король Лев (Disney)</h5>
+                <p>Эпическая история взросления львенка Симбы, который становится королем саванны.</p>
+            </a>
+            <a href="/movie_detail/5" class="list-group-item list-group-item-action">
+                <h5>Аладдин (Disney)</h5>
+                <p>История бедного юноши, который находит волшебную лампу и встречает джинна.</p>
+            </a>
+            <a href="/movie_detail/6" class="list-group-item list-group-item-action">
+                <h5>Холодное сердце (Disney)</h5>
+                <p>Приключения принцессы Эльзы, способной управлять льдом и снегом, и ее сестры Анны.</p>
+            </a>
+        {% endif %}
+    </div>
+</div>
+</body>
+</html>

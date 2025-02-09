@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Статьи</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+    <h1>Статьи</h1>
+    <div class="list-group">
+        {% for article in articles %}
+            <a href="{% url 'article_detail' article.id %}" class="list-group-item list-group-item-action">
+                <h5>{{ article.title }}</h5>
+                <p>{{ article.text|truncatewords:20 }}</p>
+                <small>Автор: {{ article.author }}</small>
+            </a>
+        {% empty %}
+            <p>Нет доступных статей.</p>
+        {% endfor %}
+    </div>
+</div>
+</body>
+</html>

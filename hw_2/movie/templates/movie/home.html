@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Главная</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+    body {
+      background-color: #78866B; 
+      color: #F5F5DC; 
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+    }
+
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      font-size: 18px;
+    }
+
+    .nav-center {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+
+    .nav a {
+      color: #F5F5DC; 
+      text-decoration: none;
+    }
+
+    .container {
+      padding: 100px 20px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 48px;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    p {
+      font-size: 20px;
+      font-weight: 400;
+      margin: 10px 0 30px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 15px 30px;
+      font-size: 18px;
+      border: 2px solid #F5F5DC; 
+      color: #F5F5DC;
+      text-decoration: none;
+      border-radius: 30px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .button:hover {
+      background-color: #F5F5DC;
+      color: #78866B;
+    }
+
+    .why-section {
+      padding: 80px 20px;
+      background-color: #4c634c; 
+      text-align: center;
+    }
+
+    .why-section h2 {
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .why-section ul {
+      list-style: none;
+      padding: 0;
+      font-size: 20px;
+    }
+
+    .why-section ul li {
+      margin: 15px 0;
+    }
+  </style>
+</head>
+<body>
+
+
+  <div class="nav">
+  
+    <div class="nav-center">
+      <a href="/movies/">Фильмы</a>
+      <span>|</span>
+      <a href="/articles/">Статьи</a>
+    </div>
+    
+    <div class="nav-right">
+      <a href="/admin/">Админ</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1>Добро пожаловать!</h1>
+    <p>Управляйте своими фильмами легко и эффективно</p>
+    <a href="/movies/" class="button">Перейти к фильмам</a>
+  </div>
+
+  <div class="why-section">
+    <h2>Преимущества нашего сайта</h2>
+    <ul>
+      <li> Удобный интерфейс</li>
+      <li>Быстрое управление фильмами</li>
+      <li>Доступ с любого устройства</li>
+      <li>Безопасность данных</li>
+      <li> Поддержка нескольких языков</li>
+    </ul>
+  </div>
+
+</body>
+</html>

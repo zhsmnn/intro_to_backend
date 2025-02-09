@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{{ movie.title }}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+    <h1>{{ movie.title }}</h1>
+    
+    {% if movie.poster %}
+    <div class="mb-4">
+        <img src="{{ movie.poster.url }}" alt="{{ movie.title }}" class="img-fluid">
+    </div>
+    {% endif %}
+    
+    <p><strong>Описание:</strong> {{ movie.description }}</p>
+    <p><strong>Продюсер:</strong> {{ movie.producer }}</p>
+    <p><strong>Длительность:</strong> {{ movie.duration }} секунд</p>
+    
+
+    {% if movie.genre %}
+    <p><strong>Жанр:</strong> {{ movie.genre }}</p>
+    {% endif %}
+    {% if movie.release_date %}
+    <p><strong>Дата выпуска:</strong> {{ movie.release_date }}</p>
+    {% endif %}
+    {% if movie.country %}
+    <p><strong>Страна:</strong> {{ movie.country }}</p>
+    {% endif %}
+    {% if movie.rating %}
+    <p><strong>Рейтинг:</strong> {{ movie.rating }}</p>
+    {% endif %}
+    {% if movie.cast %}
+    <p><strong>В главных ролях:</strong> {{ movie.cast }}</p>
+    {% endif %}
+    
+    <a href="{% url 'movie_list' %}" class="btn btn-secondary">Назад к списку</a>
+</div>
+</body>
+</html>
+

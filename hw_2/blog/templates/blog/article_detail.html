@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{{ article.title }}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+    <h1>{{ article.title }}</h1>
+    <p><strong>Автор:</strong> {{ article.author }}</p>
+    <p>{{ article.text }}</p>
+    <a href="{% url 'article_list' %}" class="btn btn-secondary">Назад к списку</a>
+</div>
+</body>
+</html>
