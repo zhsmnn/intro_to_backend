@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{ post.title }}</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+    </style>
+</head>
+<body>
+    <h1>{{ post.title }}</h1>
+    <p>{{ post.description }}</p>
+    <p><strong>Автор:</strong> {{ post.author }}</p>
+    <a href="{% url 'post_delete' post.id %}">Удалить пост</a><br>
+    <a href="{% url 'post_list_create' %}">Вернуться к списку</a>
+</body>
+</html>
