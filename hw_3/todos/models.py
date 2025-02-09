@@ -10,7 +10,4 @@ class Todo(models.Model):
     def __str__(self):
         return self.title
 
-def todo_delete(request, id):
-    todo = Todo.objects.get(id=id)
-    todo.delete()
-    return redirect('todo_list')
+

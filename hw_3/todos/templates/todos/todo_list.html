@@ -1,46 +1,113 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Todos</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
     <style>
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #f4f7fa;
+            background-color: #EDEAE0;
+            color: #3E3E3E;
+            font-family: 'Inter', sans-serif;
             margin: 0;
-            padding: 0;
+            text-align: center;
         }
+
+        .nav {
+            padding: 20px;
+            font-size: 18px;
+            display: flex;
+            justify-content: flex-end; /* Сдвигаем ссылки вправо */
+        }
+
+        .nav a {
+            color: #3E3E3E;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+
         .container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 40px 20px;
         }
+
+        h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+
         .todo {
             background: white;
-            padding: 15px;
-            margin-bottom: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: left;
         }
-        h1 {
-            color: #333;
+
+        .todo h2 {
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0;
         }
-        a {
-            color: #4CAF50;
-            text-decoration: none;
+
+        .todo p {
+            font-size: 18px;
+            margin: 10px 0;
         }
-        .status {
+
+        .todo .status {
             font-weight: bold;
-            color: #ff6347;
+            color: #FF6347;
         }
+
+        .todo a {
+            font-size: 18px;
+            color: #3E3E3E;
+            text-decoration: none;
+            border: 2px solid #3E3E3E;
+            padding: 8px 20px;
+            border-radius: 30px;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        .todo a:hover {
+            background-color: #3E3E3E;
+            color: #EDEAE0;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 18px;
+            border: 2px solid #3E3E3E;
+            color: #3E3E3E;
+            text-decoration: none;
+            border-radius: 30px;
+            margin-bottom: 30px;
+        }
+
+        .button:hover {
+            background-color: #3E3E3E;
+            color: #EDEAE0;
+        }
+
     </style>
 </head>
 <body>
+
+    <div class="nav">
+        <a href="/todos/">Список задач</a>
+        <a href="/admin/">Админ</a>
+    </div>
+
     <div class="container">
-        <h1>Todos</h1>
-        <a href="{% url 'todo_create' %}">Создать новый пост</a>
+        <h1>Список задач</h1>
+        <a href="{% url 'todo_create' %}" class="button">Создать новый пост</a>
         <div class="todos">
             {% for todo in todos %}
                 <div class="todo">
@@ -49,12 +116,12 @@
                     <p>Due: {{ todo.due_date }}</p>
                     <p class="status">{{ todo.status|yesno:"Выполнено,Не выполнено" }}</p>
                     <a href="{% url 'todo_delete' todo.id %}">Удалить</a>
-
                 </div>
             {% empty %}
                 <p>Нет задач.</p>
             {% endfor %}
         </div>
     </div>
+
 </body>
 </html>

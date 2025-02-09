@@ -1,15 +1,114 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Создать Todo</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+        body {
+            background-color: #EDEAE0; 
+            color: #3E3E3E;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            text-align: center;
+        }
+
+        .nav {
+            padding: 20px;
+            font-size: 18px;
+            display: flex;
+            justify-content: flex-end; /* Сдвигаем ссылки вправо */
+        }
+
+        .nav a {
+            color: #3E3E3E;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+
+        .container {
+            padding: 50px 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #FFF;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 36px;
+            font-weight: 700;
+            margin: 0 0 20px 0;
+        }
+
+        form {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        form p {
+            font-weight: 400;
+            margin: 10px 0;
+        }
+
+        form input, form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #3E3E3E;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 18px;
+            border: 2px solid #3E3E3E;
+            color: #3E3E3E;
+            background-color: #FFF;
+            text-decoration: none;
+            border-radius: 30px;
+        }
+
+        button:hover {
+            background-color: #3E3E3E;
+            color: #EDEAE0;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            color: #3E3E3E;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        a:hover {
+            color: #3E3E3E;
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <h1>Создать новый Todo</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Создать</button>
-    </form>
-    <a href="{% url 'todo_list' %}">Вернуться к списку Todos</a>
+
+    <div class="nav">
+        <a href="/admin/">Админ</a>
+    </div>
+    
+
+    <div class="container">
+        <h1>Создать новый Todo</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Создать</button>
+        </form>
+        <a href="{% url 'todo_list' %}">Вернуться к списку Todos</a>
+    </div>
+
 </body>
 </html>
+
