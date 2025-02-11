@@ -107,21 +107,22 @@
 
     <div class="container">
         <h1>Список задач</h1>
-        <a href="{% url 'todo_create' %}" class="button">Создать новый пост</a>
+        <a href="{% url 'todo_create' %}" class="button">Создать новую задачу</a>
         <div class="todos">
             {% for todo in todos %}
                 <div class="todo">
                     <h2><a href="{% url 'todo_detail' todo.id %}">{{ todo.title }}</a></h2>
                     <p>{{ todo.description }}</p>
-                    <p>Due: {{ todo.due_date }}</p>
+                    <p>Срок: {{ todo.due_date|date:"d.m.Y" }}</p>
                     <p class="status">{{ todo.status|yesno:"Выполнено,Не выполнено" }}</p>
-                    <a href="{% url 'todo_delete' todo.id %}">Удалить</a>
+                    <form action="{% url 'todo_delete' todo.id %}" method="POST" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="delete-button">Удалить</button>
+                    </form>
                 </div>
             {% empty %}
                 <p>Нет задач.</p>
             {% endfor %}
         </div>
     </div>
-
-</body>
-</html>
+    

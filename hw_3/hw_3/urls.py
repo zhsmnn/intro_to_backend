@@ -20,15 +20,7 @@ from django.contrib import admin
 
 
 urlpatterns = [
-    path('', views.index, name='index'),  
     path('admin/', admin.site.urls),
-    path('todos/', views.todo_list, name='todo_list'),
-    path('todos/create/', views.create_todo, name='create_todo'),
-    path('todos/<int:id>/', views.todo_detail, name='todo_detail'),
-    path('todos/<int:id>/delete/', views.delete_todo, name='delete_todo'),
-    path('api/todos/', views.api_todo_list, name='api_todo_list'),
-    path('api/todos/<int:id>/', views.api_todo_detail, name='api_todo_detail'),
-    path('delete/<int:id>/', views.api_todo_delete, name='todo_delete'),
     path('todos/', include('todos.urls')),
 ]
 
