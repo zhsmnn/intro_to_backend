@@ -14,14 +14,18 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.contrib import admin
 from django.urls import path, include
-from todos import views
-from django.contrib import admin 
+from django.shortcuts import redirect
 
+def redirect_to_todos(request):
+    return redirect('todo_list')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', redirect_to_todos),  
     path('todos/', include('todos.urls')),
 ]
+
 
 
