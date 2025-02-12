@@ -2,106 +2,223 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title> Task Manager </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Форум</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
-
         body {
-            background-color: #EDEAE0; 
-            color: #3E3E3E;
-            font-family: 'Inter', sans-serif;
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
             margin: 0;
+            padding: 20px;
             text-align: center;
         }
 
-        .nav {
-            padding: 20px;
-            font-size: 18px;
-            display: flex;
-            justify-content: flex-end; /* Сдвигаем ссылки вправо */
-        }
-
-        .nav a {
-            color: #3E3E3E;
-            text-decoration: none;
-            margin: 0 15px;
-        }
-
         .container {
-            padding: 100px 20px;
+            width: 60%;
+            margin: auto;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         h1 {
-            font-size: 48px;
-            font-weight: 700;
-            margin: 0;
+            color: #007bff;
         }
 
-        p {
-            font-size: 20px;
-            font-weight: 400;
-            margin: 10px 0 30px;
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
         }
 
-        .button {
-            display: inline-block;
-            padding: 15px 30px;
-            font-size: 18px;
-            border: 2px solid #3E3E3E;
-            color: #3E3E3E;
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: #007bff;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        td {
+            background: #fff;
+        }
+
+        .actions a {
             text-decoration: none;
-            border-radius: 30px;
+            padding: 6px 12px;
+            margin: 5px;
+            border-radius: 5px;
+            display: inline-block;
         }
 
-        .button:hover {
-            background-color: #3E3E3E;
-            color: #EDEAE0;
+        .view-btn {
+            background: #17a2b8;
+            color: white;
         }
 
-        .why-section {
-            padding: 80px 20px;
-            background-color: #F5F3EB; 
+        .delete-btn {
+            background: #dc3545;
+            color: white;
         }
 
-        .why-section h2 {
-            font-size: 36px;
-            font-weight: 700;
+        .add-btn {
+            display: inline-block;
+            margin-top: 20px;
+            background: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
         }
 
-        .why-section ul {
-            list-style: none;
-            padding: 0;
-            font-size: 20px;
+        .add-btn:hover {
+            background: #0056b3;
         }
 
-        .why-section ul li {
-            margin: 15px 0;
+        .empty {
+            color: #888;
+            font-style: italic;
+        }
+
+        /* Стили для модального окна */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 40%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: left;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: black;
+        }
+
+        .modal form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal label {
+            margin-top: 10px;
+        }
+
+        .modal input, .modal textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .modal button {
+            margin-top: 15px;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .modal button:hover {
+            background: #0056b3;
         }
     </style>
 </head>
 <body>
-
-    <div class="nav">
-        <a href="/todos/">Список задач</a>
-        <a href="/admin/">Админ</a>
-    </div>
-    
-
     <div class="container">
-        <h1>Добро пожаловать в Task Manager </h1>
-        <p>Управляйте своими задачами легко и эффективно</p>
-        <a href="/todos/create/" class="button">Перейти к задачам</a>
+        <h1>Форум</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>Описание</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for thread in threads %}
+                <tr>
+                    <td>{{ thread.name }}</td>
+                    <td>{{ thread.description }}</td>
+                    <td class="actions">
+                        <a href="{% url 'thread_detail' thread.id %}" class="view-btn">Просмотр</a>
+                        <a href="{% url 'thread_delete' thread.id %}" class="delete-btn">Удалить</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3" class="empty">Тем пока нет.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <button class="add-btn" onclick="openModal()">Создать тему</button>
     </div>
 
-    <div class="why-section">
-        <h2>Почему Task Manager </h2>
-        <ul>
-            <li>✔ Простота использования</li>
-            <li>✔ Эффективное управление задачами</li>
-            <li>✔ Доступ с любого устройства</li>
-        </ul>
+    <!-- Модальное окно -->
+    <div id="addThreadModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Создать новую тему</h2>
+            <form method="post" action="{% url 'thread_create' %}">
+                {% csrf_token %}
+                <label for="threadName">Название</label>
+                <input type="text" id="threadName" name="name" required>
+
+                <label for="threadDescription">Описание</label>
+                <textarea id="threadDescription" name="description" rows="3" required></textarea>
+
+                <button type="submit">Создать</button>
+            </form>
+        </div>
     </div>
 
+    <script>
+        function openModal() {
+            document.getElementById('addThreadModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('addThreadModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            let modal = document.getElementById('addThreadModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
 </body>
 </html>
