@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Список задач{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Списки дел</h2>
+<button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addListModal">Добавить список</button>
+
+<ul class="list-group">
+    {% for list in lists %}
+        <li class="list-group-item d-flex justify-content-between">
+            <a href="{% url 'todo_list_detail' list.id %}" class="text-decoration-none">{{ list.title }}</a>
+            <a href="{% url 'todo_list_delete' list.id %}" class="text-danger">Удалить</a>
+        </li>
+    {% endfor %}
+</ul>
+
+<!-- Модальное окно добавления списка -->
+<div class="modal fade" id="addListModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Добавить список</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-success">Добавить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

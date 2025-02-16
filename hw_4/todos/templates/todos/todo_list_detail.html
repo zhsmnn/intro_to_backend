@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ todo_list.title }}{% endblock %}
+
+{% block content %}
+
+<h4>Задачи</h4>
+<button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addTodoModal">Добавить задачу</button>
+
+<ul class="list-group">
+    {% for todo in todo_list.todos.all %}
+    <div class="task-item">
+        <span class="task-title">{{ todo.title }}</span>
+        <span class="task-status">{% if todo.status %}✅{% else %}❌{% endif %}</span>
+        <a href="{% url 'todo_delete' todo.id %}" class="btn btn-danger">Удалить</a>
+    </div>
+    {% endfor %}
+
+</ul>
+
+<!-- Модальное окно добавления задачи -->
+<div class="modal fade" id="addTodoModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Добавить задачу</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-success">Добавить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
