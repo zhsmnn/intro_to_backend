@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Редактировать пост</h2>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Сохранить</button>
+</form>
+
+<a href="{% url 'thread_detail' form.instance.thread.id %}" class="btn btn-secondary mt-2">Назад</a>
+{% endblock %}
+x

@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>{{ thread.name }}</h2>
+<p>{{ thread.description }}</p>
+
+<h3>Посты</h3>
+<div class="post-container">
+    {% for post in posts %}
+        <div class="post-card">
+            <strong>{{ post.title }}</strong> - {{ post.author }}
+            <p>{{ post.description }}</p>
+            {% if post.picture %}
+                <img src="{{ post.picture.url }}" alt="Image">
+            {% endif %}
+            <br>
+            <a href="{% url 'post_edit' post.id %}" class="btn btn-warning btn-sm">Редактировать</a>
+            <a href="{% url 'post_delete' post.id %}" class="btn btn-danger btn-sm">Удалить</a>
+        </div>
+    {% endfor %}
+</div>
+
+<!-- Кнопка создания поста -->
+<button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#postModal">
+    Добавить пост
+</button>
+
+<!-- Модальное окно для создания Post -->
+<div class="modal fade" id="postModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="modal-header">
+                    <h5 class="modal-title">Новый пост</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    {{ form.as_p }}
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Опубликовать</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<a href="{% url 'thread_edit' thread.id %}" class="btn btn-warning">Редактировать тему</a>
+<a href="{% url 'thread_delete' thread.id %}" class="btn btn-danger">Удалить тему</a>
+
+{% endblock %}

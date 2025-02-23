@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Список тем</h2>
+<ul>
+    {% for thread in threads %}
+        <li><a href="{% url 'thread_detail' thread.id %}">{{ thread.name }}</a></li>
+    {% endfor %}
+</ul>
+
+<!-- Кнопка открытия модального окна -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#threadModal">
+    Создать тему
+</button>
+
+<!-- Модальное окно для создания Thread -->
+<div class="modal fade" id="threadModal" tabindex="-1" aria-labelledby="threadModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="post">
+                {% csrf_token %}
+                <div class="modal-header">
+                    <h5 class="modal-title" id="threadModalLabel">Новая тема</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                </div>
+                <div class="modal-body">
+                    {{ form.as_p }}
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Создать</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
