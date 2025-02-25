@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Создать пост</h2>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Отправить</button>
+</form>
+{% endblock %}
+<label for="thread">Thread:</label>
+<select name="thread" id="thread">
+    {% for thread in threads %}
+        <option value="{{ thread.id }}">{{ thread.name }}</option>
+    {% endfor %}
+</select>
