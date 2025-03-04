@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Детали брони{% endblock %}
+
+{% block content %}
+<h2>Бронь</h2>
+<p>Пользователь: {{ reservation.user.username }}</p>
+<p>Стол: {{ reservation.table.number }}</p>
+<p>Дата: {{ reservation.date }}</p>
+<p>Статус: {{ reservation.get_status_display }}</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" name="status" value="confirmed" class="btn btn-success">Подтвердить</button>
+    <button type="submit" name="status" value="canceled" class="btn btn-danger">Отменить</button>
+</form>
+
+<a href="{% url 'reservation-list' %}" class="btn btn-secondary">Назад</a>
+{% endblock %}
