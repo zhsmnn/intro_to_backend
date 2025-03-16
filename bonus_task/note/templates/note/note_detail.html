@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}{{ note.title }}{% endblock %}
+{% block content %}
+    <div class="note-card">
+        <h2>{{ note.title }}</h2>
+        <p class="text-muted">{{ note.created_at }}</p>
+        <p>{{ note.content }}</p>
+        <a href="{% url 'note_list' %}" class="btn btn-secondary">Назад</a>
+        <a href="{% url 'note_update' note.pk %}" class="btn btn-warning">Редактировать</a>
+    </div>
+{% endblock %}
